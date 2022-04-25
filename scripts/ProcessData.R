@@ -16,9 +16,14 @@ library(PASWR2)
 library(lattice)
 library(descr)
 library(openxlsx)
+library(PASWR2)
 
 dataf <- read_excel("data/raw/Answers.xlsx")
 View(dataf)
+
+## Exploratory data analysis
+eda(dataf$gasto)
+
 
 ##Estimacion de la media del gasto
 summary(dataf$gasto)
