@@ -31,4 +31,17 @@ proporcion=cantidadDePersonas/length(dataf$gasto)
 tabla.frec=data.frame(CantidadDeDineroGastada,cantidadDePersonas,proporcion)
 tabla.frec
 
+##Hipotesis para diferencia de medias independientes (I'm sorry Samu but I have to be non-binaryfobic for this point)
+genderlist <- split(dataf,dataf$genero)
+gastoMujeres <- genderlist[[1]][4]
+gastoHombres <- genderlist[[2]][4]
+mean(gastoMujeres$gasto,na.rm = TRUE)
+sd(gastoMujeres$gasto, na.rm = TRUE)
+mean(gastoHombres$gasto,na.rm = TRUE)
+sd(gastoHombres$gasto, na.rm = TRUE)
+
+var.test(gastoHombres$gasto,gastoMujeres$gasto,alternative = "greater")
+t.test(gastoHombres$gasto, gastoMujeres$gasto,alternative = "greater")
+
+
 
