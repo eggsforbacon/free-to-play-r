@@ -19,3 +19,16 @@ library(openxlsx)
 
 dataf <- read_excel("data/raw/Answers.xlsx")
 View(dataf)
+
+##Estimacion de la media del gasto
+summary(dataf$gasto)
+
+
+##Estimacion proporcion de personas que gastan dinero
+CantidadDeDineroGastada<- c("Mayor a 0","Igual a 0")
+cantidadDePersonas <- c(length(dataf$gasto[dataf$gasto > 0]),length(dataf$gasto[dataf$gasto == 0]))
+proporcion=cantidadDePersonas/length(dataf$gasto)
+tabla.frec=data.frame(CantidadDeDineroGastada,cantidadDePersonas,proporcion)
+tabla.frec
+
+
