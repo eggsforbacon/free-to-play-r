@@ -34,7 +34,8 @@ View(dataf)
 #pie(Players, main = "Distribución de jugadores y no jugadores")
 
 ## Exploratory data analysis
-eda(dataf$gasto)
+spendings <- dataf$gasto
+eda(spendings)
 
 
 ## Estimacion de la media del gasto
@@ -48,7 +49,7 @@ proporcion=cantidadDePersonas/length(dataf$gasto)
 tabla.frec=data.frame(CantidadDeDineroGastada,cantidadDePersonas,proporcion)
 tabla.frec
 
-## Hipotesis para diferencia de medias independientes (I'm sorry Samu but I have to be non-binaryfobic for this point)
+## Hipotesis para diferencia de medias independientes (I'm sorry Samu but I have to be non-binaryphobic for this point) // torste :c
 genderlist <- split(dataf,dataf$genero)
 gastoMujeres <- genderlist[[1]][4]
 gastoHombres <- genderlist[[2]][4]
@@ -67,5 +68,16 @@ mean(dataf$tiempoAcademico,na.rm = TRUE)
 sd(dataf$tiempoAcademico,na.rm = TRUE)
 t.test(dataf$tiempoVacaciones,dataf$tiempoAcademico,paired = TRUE, alternative = "greater")
 
+## Hipótesis para diferencia de multiples medias
 
+attach(dataf)
+outliers <- boxplot(gasto, plot=FALSE)$out
+filtered_dataf <- dataf
+filtered_dataf <- filtered_dataf[-which(filtered_dataf$gasto %in% outliers), ]
+attach(filtered_dataf)
+favGenre <-as.factor(generoFavorito)
+boxplot(spendings~generoFavorito)
+anova<-aov(lm(spendings ~ favGenre))
+summary(anova)
+TukeyHSD(anova)
 
