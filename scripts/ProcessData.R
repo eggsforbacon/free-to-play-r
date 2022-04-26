@@ -25,9 +25,10 @@ library(openxlsx)
 dataf <- read_excel("data/raw/Answers.xlsx")
 View(dataf)
 
-attach(dataf)
+## Show the proportion of players and non-players
 
-gender <- factor(c(dataf$`¿Cuál es su género?`))
-gender
-gender_unclass <- unclass(gender)
-gender_unclass
+attach(dataf)
+Players <- table(factor(juegaVideojuegos, labels = c("No juegan", "Sí juegan")))
+barchart(Players)
+pie(Players, main = "Distribución de jugadores y no jugadores")
+
