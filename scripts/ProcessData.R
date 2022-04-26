@@ -79,10 +79,6 @@ t.test(dataf$tiempoVacaciones,dataf$tiempoAcademico,paired = TRUE, alternative =
 ## Hipótesis para diferencia de multiples medias
 
 attach(dataf)
-outliers <- boxplot(gasto, plot=FALSE)$out
-filtered_dataf <- dataf
-filtered_dataf <- filtered_dataf[-which(filtered_dataf$gasto %in% outliers), ]
-attach(filtered_dataf)
 favGenre <-as.factor(generoFavorito)
 boxplot(spendings~generoFavorito)
 anova<-aov(lm(spendings ~ favGenre))
