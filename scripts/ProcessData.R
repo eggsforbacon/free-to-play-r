@@ -44,9 +44,15 @@ mean(gastoMujeres$gasto,na.rm = TRUE)
 sd(gastoMujeres$gasto, na.rm = TRUE)
 mean(gastoHombres$gasto,na.rm = TRUE)
 sd(gastoHombres$gasto, na.rm = TRUE)
-
 var.test(gastoHombres$gasto,gastoMujeres$gasto,alternative = "greater")
 t.test(gastoHombres$gasto, gastoMujeres$gasto,alternative = "greater")
+
+
+##Hipotesis para diferencia de medias dependientes
+mean(dataf$tiempoVacaciones,na.rm = TRUE)
+sd(dataf$tiempoVacaciones,na.rm = TRUE)
+mean(dataf$tiempoAcademico,na.rm = TRUE)
+sd(dataf$tiempoAcademico,na.rm = TRUE)
 
 
 
