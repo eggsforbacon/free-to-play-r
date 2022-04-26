@@ -23,8 +23,11 @@ library(PASWR2)
 ##### Shame doc: everything we don't know where to put but we still need to remember
 ###### The other games: Wild Rift, Genshin Impact, Brawl Stars, Dofus, Clash of Clans, Mobile Legends, Parchis
 
-dataf <- read_excel("data/raw/Answers.xlsx")
+dataf <- read_excel("data/raw/AnswersDepurated.xlsx")
 View(dataf)
+
+## Data quality verification
+# boxplot(dataf$gasto)
 
 ## Show the proportion of players and non-players
 
@@ -36,6 +39,8 @@ View(dataf)
 ## Exploratory data analysis
 eda(dataf$gasto)
 
+boxplot(dataf$gasto)
+boxplot(dataf$edad)
 
 ## Estimacion de la media del gasto
 summary(dataf$gasto)
