@@ -29,6 +29,9 @@ View(dataf)
 ## Data quality verification
 # boxplot(dataf$gasto)
 
+## Exploratory data analysis for gasto
+eda(dataf$gasto)
+
 ## Show the proportion of players and non-players
 
 #attach(dataf)
