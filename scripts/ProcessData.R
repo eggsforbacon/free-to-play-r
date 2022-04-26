@@ -53,6 +53,7 @@ mean(dataf$tiempoVacaciones,na.rm = TRUE)
 sd(dataf$tiempoVacaciones,na.rm = TRUE)
 mean(dataf$tiempoAcademico,na.rm = TRUE)
 sd(dataf$tiempoAcademico,na.rm = TRUE)
+t.test(dataf$tiempoVacaciones,dataf$tiempoAcademico,paired = TRUE, alternative = "greater")
 
 
 
