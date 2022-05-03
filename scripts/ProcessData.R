@@ -75,5 +75,19 @@ mean(dataf$tiempoAcademico,na.rm = TRUE)
 sd(dataf$tiempoAcademico,na.rm = TRUE)
 t.test(dataf$tiempoVacaciones,dataf$tiempoAcademico,paired = TRUE, alternative = "greater")
 
+## Chi-square
+attach(dataf)
+
+tabla <- table(genero)
+tabla.1 <- freq(genero, plot = FALSE)
+tabla.1
+
+puntG <- cut(gasto, seq(from = 20, to = 89300, by = 14880), include.lowest = TRUE)
+tabla.2 <- freq(ordered(puntG), plot = FALSE)
+tabla.2
+
+tabla.3 <- crosstab(genero, puntG, prop.r = FALSE, plot = TRUE, xlab = "Gasto", ylab = "Género")
+tabla.3
+with(dataf, chisq.test(genero, puntG, correct = TRUE))
 
 
