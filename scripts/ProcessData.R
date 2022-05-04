@@ -1,5 +1,4 @@
 # Package dependencies 
-
 library(tidyverse)
 library(lubridate)
 library(xts)
@@ -19,12 +18,13 @@ library(lattice)
 library(descr)
 library(openxlsx)
 library(PASWR2)
+library(gginference)
 
 ##### Shame doc: everything we don't know where to put but we still need to remember
 ###### The other games: Wild Rift, Genshin Impact, Brawl Stars, Dofus, Clash of Clans, Mobile Legends, Parchis
 
 
-dataf <- read_excel("data/raw/AnswersDepurated.xlsx")
+dataf <- read_excel("data/raw/Answers.xlsx")
 View(dataf)
 ## Data quality verification
 # boxplot(dataf$gasto)
@@ -51,8 +51,11 @@ summary(dataf$gasto)
 
 ##Prueba de hipotesis para la media
 t.test(dataf$gasto,mu=50000,alternative="less")
+plot(t.test(dataf$gasto,mu=50000,alternative="less"))
 
-##
+##Prueba de hipotesis para la proporcion
+PDataSucces <- filter(dataf, playstore == 1)
+binom.test(x = nrow(PDataSucces), n = nrow(dataf),p = 0.5, alternative = "greater")
 
 
 ## Estimacion proporcion de personas que gastan dinero
