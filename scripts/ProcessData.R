@@ -84,9 +84,10 @@ mean(dataf$tiempoAcademico,na.rm = TRUE)
 sd(dataf$tiempoAcademico,na.rm = TRUE)
 t.test(dataf$tiempoVacaciones,dataf$tiempoAcademico,paired = TRUE, alternative = "greater")
 
-<<<<<<< HEAD
+
 ## Chi-square
-attach(dataf)
+newdataF <- subset(dataf, gasto > 0 & gasto <= 1000000)
+attach(newdataF)
 
 tabla <- table(genero)
 tabla.1 <- freq(genero, plot = FALSE)
@@ -96,10 +97,10 @@ puntG <- cut(gasto, seq(from = 20, to = 89300, by = 14880), include.lowest = TRU
 tabla.2 <- freq(ordered(puntG), plot = FALSE)
 tabla.2
 
-tabla.3 <- crosstab(genero, puntG, prop.r = FALSE, plot = TRUE, xlab = "Gasto", ylab = "Género")
+tabla.3 <- crosstab(genero, puntG, plot = TRUE, prop.c = TRUE, prop.r = TRUE, xlab = "Gasto", ylab = "Género")
 tabla.3
 with(dataf, chisq.test(genero, puntG, correct = TRUE))
-=======
+
 ## Hipótesis para diferencia de multiples medias
 
 dataf_new <- dataf[-c(21), ]
@@ -111,7 +112,7 @@ favGenre <-as.factor(generoFavorito)
 boxplot(spendings_new~generoFavorito)
 anova<-aov(lm(spendings_new ~ favGenre))
 summary(anova)
->>>>>>> main
+
 
 gender_new <- as.factor(genero)
 boxplot(spendings_new~genero)
