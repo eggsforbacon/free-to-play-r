@@ -84,7 +84,6 @@ mean(dataf$tiempoAcademico,na.rm = TRUE)
 sd(dataf$tiempoAcademico,na.rm = TRUE)
 t.test(dataf$tiempoVacaciones,dataf$tiempoAcademico,paired = TRUE, alternative = "greater")
 
-<<<<<<< HEAD
 ## Chi-square
 attach(dataf)
 
@@ -99,11 +98,10 @@ tabla.2
 tabla.3 <- crosstab(genero, puntG, prop.r = FALSE, plot = TRUE, xlab = "Gasto", ylab = "Género")
 tabla.3
 with(dataf, chisq.test(genero, puntG, correct = TRUE))
-=======
+
 ## Hipótesis para diferencia de multiples medias
 
-dataf_new <- dataf[-c(21), ]
-dataf_new <- dataf_new[-c(), ]
+dataf_new <- subset(dataf, gasto>0 & gasto<= 80000)
 view(dataf_new)
 attach(dataf_new)
 spendings_new <- gasto
@@ -111,11 +109,9 @@ favGenre <-as.factor(generoFavorito)
 boxplot(spendings_new~generoFavorito)
 anova<-aov(lm(spendings_new ~ favGenre))
 summary(anova)
->>>>>>> main
 
-gender_new <- as.factor(genero)
+attach(dataf_new)
+gender <- as.factor(genero)
 boxplot(spendings_new~genero)
-anova <- aov(lm(spendings_new ~ gender_new))
+anova <- aov(lm(spendings_new ~ gender))
 summary(anova)
-
-## Ninguna es diferente, pero hay un chingo de datos atipicos
