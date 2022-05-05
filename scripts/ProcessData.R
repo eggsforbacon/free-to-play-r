@@ -86,10 +86,19 @@ t.test(dataf$tiempoVacaciones,dataf$tiempoAcademico,paired = TRUE, alternative =
 
 ## Hipótesis para diferencia de multiples medias
 
-attach(dataf)
+dataf_new <- dataf[-c(21), ]
+dataf_new <- dataf_new[-c(), ]
+view(dataf_new)
+attach(dataf_new)
+spendings_new <- gasto
 favGenre <-as.factor(generoFavorito)
-boxplot(spendings~generoFavorito)
-anova<-aov(lm(spendings ~ favGenre))
+boxplot(spendings_new~generoFavorito)
+anova<-aov(lm(spendings_new ~ favGenre))
 summary(anova)
-TukeyHSD(anova)
 
+gender_new <- as.factor(genero)
+boxplot(spendings_new~genero)
+anova <- aov(lm(spendings_new ~ gender_new))
+summary(anova)
+
+## Ninguna es diferente, pero hay un chingo de datos atipicos
