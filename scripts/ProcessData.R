@@ -1,5 +1,4 @@
 # Package dependencies 
-
 library(tidyverse)
 library(lubridate)
 library(xts)
@@ -19,13 +18,14 @@ library(lattice)
 library(descr)
 library(openxlsx)
 library(PASWR2)
+library(gginference)
 
 ##### Shame doc: everything we don't know where to put but we still need to remember
 ###### The other games: Wild Rift, Genshin Impact, Brawl Stars, Dofus, Clash of Clans, Mobile Legends, Parchis
 
-dataf <- read_excel("data/raw/AnswersDepurated.xlsx")
-View(dataf)
 
+dataf <- read_excel("data/raw/Answers.xlsx")
+View(dataf)
 ## Data quality verification
 # boxplot(dataf$gasto)
 
@@ -40,13 +40,22 @@ eda(dataf$gasto)
 #pie(Players, main = "Distribución de jugadores y no jugadores")
 
 ## Exploratory data analysis
-eda(dataf$gasto)
+spendings <- dataf$gasto
+eda(spendings)
 
 boxplot(dataf$gasto)
 boxplot(dataf$edad)
 
 ## Estimacion de la media del gasto
 summary(dataf$gasto)
+
+##Prueba de hipotesis para la media
+t.test(dataf$gasto,mu=50000,alternative="less")
+plot(t.test(dataf$gasto,mu=50000,alternative="less"))
+
+##Prueba de hipotesis para la proporcion
+PDataSucces <- filter(dataf, playstore == 1)
+binom.test(x = nrow(PDataSucces), n = nrow(dataf),p = 0.5, alternative = "greater")
 
 
 ## Estimacion proporcion de personas que gastan dinero
@@ -56,7 +65,7 @@ proporcion=cantidadDePersonas/length(dataf$gasto)
 tabla.frec=data.frame(CantidadDeDineroGastada,cantidadDePersonas,proporcion)
 tabla.frec
 
-## Hipotesis para diferencia de medias independientes (I'm sorry Samu but I have to be non-binaryfobic for this point)
+## Hipotesis para diferencia de medias independientes (I'm sorry Samu but I have to be non-binaryphobic for this point) // torste :c
 genderlist <- split(dataf,dataf$genero)
 gastoMujeres <- genderlist[[1]][4]
 gastoHombres <- genderlist[[2]][4]
@@ -75,6 +84,7 @@ mean(dataf$tiempoAcademico,na.rm = TRUE)
 sd(dataf$tiempoAcademico,na.rm = TRUE)
 t.test(dataf$tiempoVacaciones,dataf$tiempoAcademico,paired = TRUE, alternative = "greater")
 
+<<<<<<< HEAD
 ## Chi-square
 attach(dataf)
 
@@ -89,5 +99,23 @@ tabla.2
 tabla.3 <- crosstab(genero, puntG, prop.r = FALSE, plot = TRUE, xlab = "Gasto", ylab = "Género")
 tabla.3
 with(dataf, chisq.test(genero, puntG, correct = TRUE))
+=======
+## Hipótesis para diferencia de multiples medias
 
+dataf_new <- dataf[-c(21), ]
+dataf_new <- dataf_new[-c(), ]
+view(dataf_new)
+attach(dataf_new)
+spendings_new <- gasto
+favGenre <-as.factor(generoFavorito)
+boxplot(spendings_new~generoFavorito)
+anova<-aov(lm(spendings_new ~ favGenre))
+summary(anova)
+>>>>>>> main
 
+gender_new <- as.factor(genero)
+boxplot(spendings_new~genero)
+anova <- aov(lm(spendings_new ~ gender_new))
+summary(anova)
+
+## Ninguna es diferente, pero hay un chingo de datos atipicos
