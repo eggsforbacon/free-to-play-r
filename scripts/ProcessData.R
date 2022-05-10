@@ -102,6 +102,10 @@ with(dataf, chisq.test(genero, puntG, correct = TRUE))
 ## Hipótesis para diferencia de multiples medias
 
 dataf_new <- subset(dataf, gasto>0 & gasto<= 80000)
+
+## Hipotesis para diferencia de multiples medias
+dataf_new <- dataf[-c(21), ]
+dataf_new <- dataf_new[-c(), ]
 view(dataf_new)
 attach(dataf_new)
 spendings_new <- gasto
@@ -115,3 +119,22 @@ gender <- as.factor(genero)
 boxplot(spendings_new~genero)
 anova <- aov(lm(spendings_new ~ gender))
 summary(anova)
+
+## Ninguna es diferente, pero hay un chingo de datos atipicos
+
+#Regresion
+new_Data <- subset(dataf,gasto <= 80000)
+attach(new_Data)
+plot(tiempoVacaciones,gasto)
+cor.test(gasto, tiempoVacaciones)
+Regresion <- lm(gasto ~ tiempoVacaciones, data = new_data)
+summary(Regresion)
+dwtest(Regresion)
+Residuos <- residuals(Regresion)
+shapiro.test(Residuos)
+
+Y_estim<-predict(Regresion,list(Tiempo_uso=24), interval = "predict")
+Y_estim
+
+Y_estim2<-predict(Regresion,list(Tiempo_uso=24), interval = "confidence")
+Y_estim2
