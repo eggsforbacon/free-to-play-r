@@ -51,11 +51,10 @@ summary(dataf$gasto)
 
 ##Prueba de hipotesis para la media
 t.test(dataf$gasto,mu=50000,alternative="less")
-plot(t.test(dataf$gasto,mu=50000,alternative="less"))
 
 ##Prueba de hipotesis para la proporcion
 PDataSucces <- filter(dataf, playstore == 1)
-binom.test(x = nrow(PDataSucces), n = nrow(dataf),p = 0.5, alternative = "greater")
+binom.test(x = nrow(PDataSucces), n = nrow(dataf),p = 0.5, alternative = "less")
 
 
 ## Estimacion proporcion de personas que gastan dinero
