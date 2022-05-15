@@ -51,11 +51,10 @@ summary(dataf$gasto)
 
 ##Prueba de hipotesis para la media
 t.test(dataf$gasto,mu=50000,alternative="less")
-plot(t.test(dataf$gasto,mu=50000,alternative="less"))
 
 ##Prueba de hipotesis para la proporcion
 PDataSucces <- filter(dataf, playstore == 1)
-binom.test(x = nrow(PDataSucces), n = nrow(dataf),p = 0.5, alternative = "greater")
+binom.test(x = nrow(PDataSucces), n = nrow(dataf),p = 0.5, alternative = "less")
 
 
 ## Estimacion proporcion de personas que gastan dinero
@@ -84,7 +83,10 @@ mean(dataf$tiempoAcademico,na.rm = TRUE)
 sd(dataf$tiempoAcademico,na.rm = TRUE)
 t.test(dataf$tiempoVacaciones,dataf$tiempoAcademico,paired = TRUE, alternative = "greater")
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 ## Chi-square
 newdataF <- subset(dataf, gasto > 0 & gasto <= 1000000)
 attach(newdataF)
@@ -103,6 +105,9 @@ with(dataf, chisq.test(genero, puntG, correct = TRUE))
 
 ## Hipótesis para diferencia de multiples medias
 
+dataf_new <- subset(dataf, gasto>0 & gasto<= 80000)
+
+## Hipotesis para diferencia de multiples medias
 dataf_new <- dataf[-c(21), ]
 dataf_new <- dataf_new[-c(), ]
 view(dataf_new)
@@ -112,11 +117,32 @@ favGenre <-as.factor(generoFavorito)
 boxplot(spendings_new~generoFavorito)
 anova<-aov(lm(spendings_new ~ favGenre))
 summary(anova)
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 
-gender_new <- as.factor(genero)
+attach(dataf_new)
+gender <- as.factor(genero)
 boxplot(spendings_new~genero)
-anova <- aov(lm(spendings_new ~ gender_new))
+anova <- aov(lm(spendings_new ~ gender))
 summary(anova)
 
 ## Ninguna es diferente, pero hay un chingo de datos atipicos
+
+#Regresion
+new_Data <- subset(dataf,gasto <= 80000)
+attach(new_Data)
+plot(tiempoVacaciones,gasto)
+cor.test(gasto, tiempoVacaciones)
+Regresion <- lm(gasto ~ tiempoVacaciones, data = new_data)
+summary(Regresion)
+dwtest(Regresion)
+Residuos <- residuals(Regresion)
+shapiro.test(Residuos)
+
+Y_estim<-predict(Regresion,list(Tiempo_uso=24), interval = "predict")
+Y_estim
+
+Y_estim2<-predict(Regresion,list(Tiempo_uso=24), interval = "confidence")
+Y_estim2
