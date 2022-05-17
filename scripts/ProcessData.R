@@ -64,7 +64,7 @@ tabla.3 <- crosstab(newdataF$genero, puntG, plot = TRUE, prop.c = TRUE, prop.r =
 tabla.3
 with(dataf, chisq.test(newdataF$genero, puntG, correct = TRUE))
 
-## Hipótesis para diferencia de multiples medias
+## Hipï¿½tesis para diferencia de multiples medias
 dataf_new <- subset(dataf, gasto>0 & gasto<= 80000)
 
 dataf_new <- dataf[-c(21), ]
@@ -97,6 +97,9 @@ summary(Regresion)
 
 ## Independencia
 dwtest(Regresion)
+
+## Heterocedasticidad
+bptest(Regresion)
 
 ## Residuos
 Residuos <- residuals(Regresion)
